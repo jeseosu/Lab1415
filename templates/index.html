@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Головна{% endblock %}
+{% block content %}
+<div class="hero container">
+    <div class="hero--info">
+        <h1>Ласкаво просимо до Wolk-Talk</h1>
+        <h2>Ваш ідеальний досвід користування форумом починається тут!</h2>
+        <p>Вітаємо на перехресті традицій та смаку! Тут кожен рецепт — це історія, а кожен гість — частина нашої великої родини.</p>
+        {% if g.user %}
+            <a href="{{ url_for('boards') }}"><button class="btn">До дошки</button></a>
+        {% else %}
+            <a href="{{ url_for('register') }}"><button class="btn">Приєднатися</button></a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container boards">
+    <h3>Дошка</h3>
+    {% include "_boards.html" %}
+</div>
+{% endblock %}

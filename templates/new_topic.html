@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Нова тема{% endblock %}
+{% block content %}
+<div class="container page">
+    <p class="crumbs"><a href="{{ url_for('boards') }}">Дошка</a> / <a href="{{ url_for('board_view', slug=board.slug) }}">{{ board.title }}</a> / Нова тема</p>
+    <h2 class="page-title">Нова тема в «{{ board.title }}»</h2>
+    <form method="post" class="card-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="form-group">
+            <label>Назва теми</label>
+            <input type="text" name="title" maxlength="120" required value="{{ request.form.get('title', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Текст</label>
+            <textarea name="body" rows="8" required>{{ request.form.get('body', '') }}</textarea>
+        </div>
+        <button type="submit" class="btn-submit">Опублікувати</button>
+    </form>
+</div>
+{% endblock %}

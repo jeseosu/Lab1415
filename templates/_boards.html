@@ -1,0 +1,10 @@
+<div class="boards-bg">
+    {% for cat in categories %}
+    <div class="board-column">
+        <h4>{{ cat.title }}</h4>
+        {% for b in cat.boards %}
+            <a href="{{ url_for('board_view', slug=b.slug) }}">{{ b.title }}</a>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>

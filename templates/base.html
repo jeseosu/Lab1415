@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Wolk-Talk{% endblock %} — Forum Wolk-Talk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+{% block layout %}
+    <div class="wrapper">
+        {% include "_header.html" %}
+        {% block content %}{% endblock %}
+    </div>
+    {% include "_stats.html" %}
+{% endblock %}
+</body>
+</html>
