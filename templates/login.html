@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Вхід{% endblock %}
+{% block layout %}
+<div class="login-wrapper">
+    {% include "_header.html" %}
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Вхід до системи</h2>
+            <form method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <div class="form-group">
+                    <label>Ім'я користувача</label>
+                    <input type="text" name="username" placeholder="Введіть ваше ім'я" required>
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" name="password" placeholder="Введіть пароль" required>
+                </div>
+                <button type="submit" class="btn-submit">Увійти</button>
+            </form>
+            <p class="login-alt">Немає акаунта? <a href="{{ url_for('register') }}">Зареєструватися</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

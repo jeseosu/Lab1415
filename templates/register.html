@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Реєстрація{% endblock %}
+{% block layout %}
+<div class="login-wrapper">
+    {% include "_header.html" %}
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Реєстрація</h2>
+            <form method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <div class="form-group">
+                    <label>Ім'я користувача</label>
+                    <input type="text" name="username" placeholder="3–20 символів" maxlength="20" required value="{{ request.form.get('username', '') }}">
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" name="password" placeholder="Мінімум 6 символів" required>
+                </div>
+                <div class="form-group">
+                    <label>Повторіть пароль</label>
+                    <input type="password" name="password2" placeholder="Ще раз пароль" required>
+                </div>
+                <button type="submit" class="btn-submit">Створити акаунт</button>
+            </form>
+            <p class="login-alt">Вже є акаунт? <a href="{{ url_for('login') }}">Увійти</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ board.title }}{% endblock %}
+{% block content %}
+<div class="container page">
+    <p class="crumbs"><a href="{{ url_for('boards') }}">Дошка</a> / {{ board.category.title }} / {{ board.title }}</p>
+    <div class="page-head">
+        <h2 class="page-title">{{ board.title }}</h2>
+        <a class="btn-link" href="{{ url_for('new_topic', slug=board.slug) }}">+ Нова тема</a>
+    </div>
+
+    {% if board.topics %}
+    <ul class="topic-list">
+        {% for t in board.topics %}
+        <li>
+            <a href="{{ url_for('topic_view', topic_id=t.id) }}">{{ t.title }}</a>
+            <small>{{ t.author.username }} · {{ t.created_at|dt }} · відповідей: {{ t.posts|length }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p class="empty">У цьому розділі ще немає тем.</p>
+    {% endif %}
+</div>
+{% endblock %}

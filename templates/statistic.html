@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Статистика{% endblock %}
+{% block content %}
+<div class="container page">
+    <h2 class="page-title">Статистика форуму</h2>
+    <div class="stat-cards">
+        <div class="stat-card"><span>{{ stats.users }}</span>користувачів</div>
+        <div class="stat-card"><span>{{ stats.topics }}</span>тем</div>
+        <div class="stat-card"><span>{{ stats.messages }}</span>повідомлень</div>
+    </div>
+
+    <h3 class="page-subtitle">Останні теми</h3>
+    {% if latest %}
+    <ul class="topic-list">
+        {% for t in latest %}
+        <li>
+            <a href="{{ url_for('topic_view', topic_id=t.id) }}">{{ t.title }}</a>
+            <small>{{ t.board.title }} · {{ t.author.username }} · {{ t.created_at|dt }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p class="empty">Тем поки немає — станьте першим!</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.title }}{% endblock %}
+{% block content %}
+<div class="container page">
+    <p class="crumbs"><a href="{{ url_for('boards') }}">Дошка</a> / <a href="{{ url_for('board_view', slug=topic.board.slug) }}">{{ topic.board.title }}</a> / {{ topic.title }}</p>
+    <h2 class="page-title">{{ topic.title }}</h2>
+
+    <article class="post post-first">
+        <header><strong>{{ topic.author.username }}</strong> <small>{{ topic.created_at|dt }}</small></header>
+        <div class="post-body">{{ topic.body }}</div>
+    </article>
+
+    {% for p in topic.posts %}
+    <article class="post" {% if loop.last %}id="last"{% endif %}>
+        <header><strong>{{ p.author.username }}</strong> <small>{{ p.created_at|dt }}</small></header>
+        <div class="post-body">{{ p.body }}</div>
+    </article>
+    {% endfor %}
+
+    {% if g.user %}
+    <form method="post" class="card-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div class="form-group">
+            <label>Ваша відповідь</label>
+            <textarea name="body" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Відповісти</button>
+    </form>
+    {% else %}
+        <p class="empty"><a href="{{ url_for('login', next=request.path) }}">Увійдіть</a>, щоб відповісти.</p>
+    {% endif %}
+</div>
+{% endblock %}
